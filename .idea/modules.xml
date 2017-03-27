@@ -3,7 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LifxHttpAndroid.iml" filepath="$PROJECT_DIR$/LifxHttpAndroid.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LifxHttpAndroid.iml" filepath="$PROJECT_DIR$/LifxHttpAndroid.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lifxhttpandroidlibrary/lifxhttpandroidlibrary.iml" filepath="$PROJECT_DIR$/lifxhttpandroidlibrary/lifxhttpandroidlibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/lifxhttpandroidlibrary/lifxhttpandroidlibrary.iml" filepath="$PROJECT_DIR$/lifxhttpandroidlibrary/lifxhttpandroidlibrary.iml" />
     </modules>
   </component>

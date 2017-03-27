@@ -1,5 +1,12 @@
 apply plugin: 'com.android.library'
 
+// Java8 not fully supported in library projects yet, https://code.google.com/p/android/issues/detail?id=211386
+// this is a temporary workaround to get at least lambdas compiling
+gradle.projectsEvaluated {
+    tasks.withType(JavaCompile) {
+        options.compilerArgs << "-Xbootclasspath/a:" + System.properties.get("java.home") + "/lib/rt.jar"
+    }
+}
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
@@ -22,8 +29,8 @@ android {
     }
 
     compileOptions {
-        targetCompatibility 1.8
         sourceCompatibility 1.8
+        targetCompatibility 1.8
     }
 }
 
@@ -32,7 +39,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.2.0'
+    compile 'com.android.support:appcompat-v7:25.3.0'
     testCompile 'junit:junit:4.12'
     compile 'com.squareup.okhttp3:logging-interceptor:3.4.0-RC1'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
