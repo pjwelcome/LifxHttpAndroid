@@ -1,4 +1,14 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
+
+task generateSourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier 'sources'
+}
+
+group = 'com.multimeleon.android.lifxhttpandroidlibrary' // Change this to match your package name
+version = '0.0.1' // Change this to match your version number
 
 // Java8 not fully supported in library projects yet, https://code.google.com/p/android/issues/detail?id=211386
 // this is a temporary workaround to get at least lambdas compiling
@@ -16,6 +26,7 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -48,4 +59,31 @@ dependencies {
     compile 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'io.reactivex.rxjava2:rxjava:2.0.5'
+}
+
+artifacts {
+    archives generateSourcesJar
+}
+
+bintray {
+    user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
+    key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
+    configurations = ['archives']
+    pkg {
+        repo = 'maven'
+        name = 'com.multimeleon.android.lifxhttpandroidlibrary'
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/pjwelcome/LifxHttpAndroid.git'
+        websiteUrl = 'https://pjwelcome.github.io/LifxHttpAndroid'
+        version {
+            name = '0.0.1'
+            desc = 'Lifx lights library for Android'
+            vcsTag = '0.0.1'
+            released = new Date()
+        }
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.4'
 }

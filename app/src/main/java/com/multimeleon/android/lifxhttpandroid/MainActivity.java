@@ -1,7 +1,7 @@
 package com.multimeleon.android.lifxhttpandroid;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.multimeleon.android.lifxhttpandroidlibrary.LifxCallBacks;
@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity implements LifxCallBacks {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        LifxClient client = new LifxClient("c97f8d371ad06e865dcead0b5c8d71ca9155e41eed56f526f2930b044346697f",this);
+        LifxClient client = new LifxClient("apikey", this);
         client.getListOfLights();
     }
 
