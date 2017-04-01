@@ -8,4 +8,6 @@ package com.multimeleon.android.lifxhttpandroidlibrary.Common;
 public class Constants {
 
     public static final String LIFXALLLIGGHTSSTRING = "all";
+    public static final String LIFXLIGHTSONSTRING = "on";
+    public static final String LIFXLIGHTSOFFSTRING = "off";
 }

@@ -1,8 +1,11 @@
 package com.multimeleon.android.lifxhttpandroidlibrary;
 
+import com.multimeleon.android.lifxhttpandroidlibrary.Common.Constants;
 import com.multimeleon.android.lifxhttpandroidlibrary.Common.Injector;
 import com.multimeleon.android.lifxhttpandroidlibrary.Interfaces.ILifxClient;
+import com.multimeleon.android.lifxhttpandroidlibrary.Models.SingleLight.LifxLightStateRequest;
 import com.multimeleon.android.lifxhttpandroidlibrary.Models.SingleLight.Light;
+import com.multimeleon.android.lifxhttpandroidlibrary.Models.SingleLight.Result;
 import com.multimeleon.android.lifxhttpandroidlibrary.Repo.LifxClientPresenter;
 import com.multimeleon.android.lifxhttpandroidlibrary.Repo.LifxClientPresenterImpl;
 
@@ -19,11 +22,12 @@ import io.reactivex.schedulers.Schedulers;
 public class LifxClient implements ILifxClient {
 
     private String apiKey;
-    private LifxCallBacks callBacks;
+    private LifxLightToggleCallBacks callBacks;
     private List<Light> lights;
     private String error;
     private LifxClientPresenter presenter;
-    public LifxClient(String apiKey,LifxCallBacks callBacks) {
+
+    public LifxClient(String apiKey, LifxLightToggleCallBacks callBacks) {
         this.apiKey = apiKey;
         this.callBacks = callBacks;
         presenter = new LifxClientPresenterImpl(this, Injector.provideLifxLightsRepo(this.apiKey), Schedulers.io(), AndroidSchedulers.mainThread());
@@ -39,15 +43,27 @@ public class LifxClient implements ILifxClient {
     }
 
     @Override
+    public String getError() {
+        return this.error;
+    }
+
+    @Override
     public void setError(String message) {
         this.error = message;
         callBacks.lifxError(error);
     }
 
     @Override
-    public String getError() {
-        return this.error;
+    public void toggleLight(String lightId, boolean on, Double brightness) {
+
+        presenter.toggleLights(lightId, new LifxLightStateRequest(on ? Constants.LIFXLIGHTSONSTRING : Constants.LIFXLIGHTSOFFSTRING, brightness));
     }
+
+    @Override
+    public void toggleLightResult(List<Result> results) {
+        callBacks.LightToggledSuccess(results);
+    }
+
 
     @Override
     public void getListOfLights() {

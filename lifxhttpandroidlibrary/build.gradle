@@ -8,7 +8,7 @@ task generateSourcesJar(type: Jar) {
 }
 
 group = 'com.multimeleon.android.lifxhttpandroidlibrary' // Change this to match your package name
-version = '0.0.1' // Change this to match your version number
+version = '0.0.3' // Change this to match your version number
 
 // Java8 not fully supported in library projects yet, https://code.google.com/p/android/issues/detail?id=211386
 // this is a temporary workaround to get at least lambdas compiling
@@ -70,15 +70,15 @@ bintray {
     key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
     configurations = ['archives']
     pkg {
-        repo = 'maven'
-        name = 'com.multimeleon.android.lifxhttpandroidlibrary'
+        repo = 'lifxhttpandroidlibrary'
+        name = 'com.multimeleon.android'
         licenses = ['Apache-2.0']
         vcsUrl = 'https://github.com/pjwelcome/LifxHttpAndroid.git'
         websiteUrl = 'https://pjwelcome.github.io/LifxHttpAndroid'
         version {
-            name = '0.0.1'
+            name = '0.0.3'
             desc = 'Lifx lights library for Android'
-            vcsTag = '0.0.1'
+            vcsTag = '0.0.3'
             released = new Date()
         }
     }
